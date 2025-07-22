@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>مركز النار والدم</title>
+    <style>
+        /* --- Google Font --- */
+        @import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap');
+
+        /* --- Global Variables --- */
+        :root {
+            --primary-color: #ff4d4d; /* Red-Orange for fire */
+            --secondary-color: #1a1a1a; /* Dark background */
+            --text-color: #f0f0f0; /* Light gray text */
+            --card-bg: #2c2c2c; /* Card background */
+            --border-color: #444;
+        }
+
+        /* --- General Styles --- */
+        body {
+            font-family: 'Cairo', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: var(--secondary-color);
+            color: var(--text-color);
+            padding-bottom: 80px; /* Space for the bottom nav */
+        }
+
+        /* --- Main Content --- */
+        main {
+            padding: 20px;
+        }
+
+        .page {
+            display: none; /* Hide all pages by default */
+            animation: fadeIn 0.5s;
+        }
+
+        .page.active {
+            display: block; /* Show active page */
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* --- Header --- */
+        .header {
+            text-align: center;
+            padding: 40px 20px;
+            background-image: linear-gradient(rgba(26, 26, 26, 0.8), rgba(26, 26, 26, 1)), url('https://i.imgur.com/example.jpg'); /* ضع رابط صورتك هنا */
+            background-size: cover;
+            background-position: center;
+            border-bottom: 2px solid var(--primary-color);
+        }
+
+        .header h1 {
+            margin: 0;
+            font-size: 2.5rem;
+            color: #fff;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.7);
+        }
+
+        .header p {
+            font-size: 1.1rem;
+            color: var(--text-color);
+        }
+
+        /* --- Buttons --- */
+        .btn {
+            display: inline-block;
+            background-color: var(--primary-color);
+            color: #fff;
+            padding: 12px 25px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: background-color 0.3s, transform 0.2s;
+            border: none;
+            cursor: pointer;
+            font-family: 'Cairo', sans-serif;
+        }
+
+        .btn:hover {
+            background-color: #e63939;
+            transform: scale(1.05);
+        }
+        
+        .btn-secondary {
+            background-color: transparent;
+            border: 2px solid var(--primary-color);
+            color: var(--primary-color);
+        }
+
+        .btn-secondary:hover {
+            background-color: var(--primary-color);
+            color: #fff;
+        }
+
+        /* --- Section Title --- */
+        h2 {
+            color: var(--primary-color);
+            border-bottom: 2px solid var(--border-color);
+            padding-bottom: 10px;
+            margin-top: 0;
+        }
+
+        /* --- Events Page --- */
+        .event-list {
+            display: grid;
+            gap: 15px;
+        }
+
+        .event-card {
+            background-color: var(--card-bg);
+            padding: 20px;
+            border-radius: 10px;
+            border-left: 5px solid var(--primary-color);
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .event-card h3 {
+            margin: 0;
+            color: #fff;
+        }
+
+        .event-info {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.9rem;
+            color: #ccc;
+        }
+        
+        .event-type {
+            background-color: var(--primary-color);
+            color: #fff;
+            padding: 3px 8px;
+            border-radius: 5px;
+            font-size: 0.8rem;
+        }
+
+
+        /* --- Announcements Page --- */
+        .announcement-post {
+            background-color: var(--card-bg);
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 15px;
+        }
+
+        .announcement-post h3 {
+            margin-top: 0;
+            color: var(--primary-color);
+        }
+
+        /* --- Suggestion Form --- */
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+        }
+
+        .form-group textarea {
+            width: 100%;
+            padding: 12px;
+            border-radius: 8px;
+            border: 1px solid var(--border-color);
+            background-color: var(--card-bg);
+            color: var(--text-color);
+            font-family: 'Cairo', sans-serif;
+            min-height: 120px;
+            resize: vertical;
+        }
+        
+        /* --- Important Links --- */
+        .links-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .links-list li a {
+            display: block;
+            background-color: var(--card-bg);
+            color: var(--text-color);
+            padding: 15px;
+            margin-bottom: 10px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: background-color 0.3s, transform 0.2s;
+            border-right: 4px solid var(--primary-color);
+        }
+
+        .links-list li a:hover {
+            background-color: #3c3c3c;
+            transform: translateX(-5px);
+        }
+
+        /* --- Bottom Navigation --- */
+        .bottom-nav {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background-color: #222;
+            display: flex;
+            justify-content: space-around;
+            padding: 10px 0;
+            border-top: 1px solid var(--border-color);
+            box-shadow: 0 -2px 10px rgba(0,0,0,0.3);
+        }
+
+        .nav-button {
+            background: none;
+            border: none;
+            color: #aaa;
+            cursor: pointer;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 4px;
+            font-size: 0.75rem;
+            font-family: 'Cairo', sans-serif;
+        }
+        
+        .nav-button svg {
+            width: 24px;
+            height: 24px;
+        }
+
+        .nav-button.active {
+            color: var(--primary-color);
+        }
+    </style>
+</head>
+<body>
+
+    <main>
+        <div id="home" class="page active">
+            <header class="header">
+                <h1>مركز النار والدم</h1>
+                <p>مجتمعك الحقيقي يبدأ من هنا. انضم إلينا وكن جزءًا من العائلة.</p>
+                <a href="https://t.me/your_group_link" target="_blank" class="btn">انضم إلى الكروب 🔥</a>
+            </header>
+        </div>
+
+        <div id="events" class="page">
+            <h2>📅 الفعاليات القادمة</h2>
+            <div id="event-list-container" class="event-list">
+                </div>
+        </div>
+
+        <div id="announcements" class="page">
+    <h2>📢 الإعلانات والتحديثات</h2>
+    <div id="announcements-container">
+        </div>
+        </div>
+        
+        <div id="suggestions" class="page">
+            <h2>🧾 قدم اقتراحك</h2>
+            <p>هل لديك فكرة لتحسين الكروب؟ شاركنا بها! سيتم إرسال اقتراحك مباشرة إلى بوت الدعم.</p>
+            <form id="suggestion-form">
+                <div class="form-group">
+                    <label for="suggestion-text">نص الاقتراح:</label>
+                    <textarea id="suggestion-text" placeholder="اكتب فكرتك هنا..." required></textarea>
+                </div>
+                <button type="submit" class="btn">إرسال الاقتراح</button>
+            </form>
+        </div>
+
+        <div id="links" class="page">
+            <h2>🔗 روابط مهمة</h2>
+            <ul class="links-list">
+                <li><a href="https://t.me/your_group_link" target="_blank">رابط الكروب الرئيسي</a></li>
+                <li><a href="https://t.me/your_channel_link" target="_blank">قناة التحديثات</a></li>
+                <li><a href="https://t.me/your_support_bot" target="_blank">بوت الدعم والتذاكر</a></li>
+                <li><a href="#" target="_blank">تحميل تطبيق APK (قريبًا)</a></li>
+            </ul>
+        </div>
+    </main>
+
+    <nav class="bottom-nav">
+        <button class="nav-button active" data-page="home">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24"><path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8h5z"/></svg>
+            الرئيسية
+        </button>
+        <button class="nav-button" data-page="events">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24"><path d="M17 12h-5v5h5v-5zM16 1v2H8V1H6v2H5c-1.11 0-1.99.9-1.99 2L3 19c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2h-1V1h-2zm3 18H5V8h14v11z"/></svg>
+            الفعاليات
+        </button>
+        <button class="nav-button" data-page="announcements">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24"><path d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm-2 12H6v-2h12v2zm0-3H6V9h12v2zm0-3H6V6h12v2z"/></svg>
+            الإعلانات
+        </button>
+        <button class="nav-button" data-page="suggestions">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24"><path d="M20.41 4.94l-1.35-1.35c-.78-.78-2.05-.78-2.83 0L3 16.82V21h4.18l13.23-13.23c.78-.79.78-2.05 0-2.83zM6.21 19H5v-1.21l8.66-8.66 1.21 1.21L6.21 19z"/></svg>
+            اقتراح
+        </button>
+        <button class="nav-button" data-page="links">
+             <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24"><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"/></svg>
+            روابط
+        </button>
+    </nav>
+
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const navButtons = document.querySelectorAll('.nav-button');
+        const pages = document.querySelectorAll('.page');
+        const suggestionForm = document.getElementById('suggestion-form');
+        const suggestionText = document.getElementById('suggestion-text');
+
+        // --- وظيفة التنقل بين الصفحات ---
+        function showPage(pageId) {
+            pages.forEach(page => page.classList.remove('active'));
+            document.getElementById(pageId).classList.add('active');
+            navButtons.forEach(button => {
+                button.classList.toggle('active', button.dataset.page === pageId);
+            });
+            window.scrollTo(0, 0); // الصعود لأعلى الصفحة عند التنقل
+        }
+
+        navButtons.forEach(button => {
+            button.addEventListener('click', () => showPage(button.dataset.page));
+        });
+
+        // --- وظيفة إرسال الاقتراح (لا تغيير هنا) ---
+        suggestionForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const text = suggestionText.value.trim();
+            if (text) {
+                // تأكد من أن هذا الرابط هو رابط بوت التذاكر الصحيح
+                const botUrl = `https://t.me/your_ticket_bot?start=suggestion_${encodeURIComponent(text)}`;
+                window.open(botUrl, '_blank');
+                suggestionText.value = '';
+                alert('شكرًا لك! تم تجهيز اقتراحك للإرسال عبر بوت التذاكر.');
+            }
+        });
+
+        // --- ✨ جديد: وظيفة عرض الفعاليات من ملف JSON ---
+        function renderEvents(eventsData) {
+            const container = document.getElementById('event-list-container');
+            container.innerHTML = '';
+            if (!eventsData || eventsData.length === 0) {
+                container.innerHTML = '<p>لا توجد فعاليات مجدولة حاليًا.</p>';
+                return;
+            }
+            eventsData.forEach(event => {
+                const card = document.createElement('div');
+                card.className = 'event-card';
+                card.innerHTML = `
+                    <div>
+                        <h3>${event.name}</h3>
+                        <div class="event-info">
+                            <span>📅 ${event.date}</span>
+                            <span class="event-type">${event.type}</span>
+                        </div>
+                    </div>
+                    <a href="${event.link}" target="_blank" class="btn btn-secondary">شارك بالفعالية</a>
+                `;
+                container.appendChild(card);
+            });
+        }
+
+        // --- ✨ جديد: وظيفة عرض الإعلانات من ملف JSON ---
+        function renderAnnouncements(announcementsData) {
+            const container = document.getElementById('announcements-container'); // سنضيف هذا الـ ID في HTML
+            container.innerHTML = '';
+            if (!announcementsData || announcementsData.length === 0) {
+                container.innerHTML = '<p>لا توجد إعلانات حاليًا.</p>';
+                return;
+            }
+            announcementsData.forEach(post => {
+                const postDiv = document.createElement('div');
+                postDiv.className = 'announcement-post';
+                postDiv.innerHTML = `
+                    <h3>${post.title}</h3>
+                    <p>${post.content}</p>
+                `;
+                container.appendChild(postDiv);
+            });
+        }
+        
+        // --- ✨ جديد: جلب البيانات عند تحميل الصفحة ---
+        fetch('events.json?v=' + new Date().getTime()) // إضافة timestamp لمنع التخزين المؤقت (cache)
+            .then(response => response.json())
+            .then(data => renderEvents(data))
+            .catch(error => console.error('Error fetching events:', error));
+
+        fetch('announcements.json?v=' + new Date().getTime())
+            .then(response => response.json())
+            .then(data => renderAnnouncements(data))
+            .catch(error => console.error('Error fetching announcements:', error));
+
+        // --- التشغيل الأولي ---
+        showPage('home');
+    });
+</script>
+
+</body>
+</html>
