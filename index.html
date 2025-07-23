@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>مركز النار والدم</title>
+    <title>النار والدم</title>
     <style>
         /* --- Google Font --- */
         @import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap');
@@ -338,7 +338,7 @@
             const text = suggestionText.value.trim();
             if (text) {
                 // تأكد من أن هذا الرابط هو رابط بوت التذاكر الصحيح
-                const botUrl = `https://t.me/your_ticket_bot?start=suggestion_${encodeURIComponent(text)}`;
+                const botUrl = `https://t.me/ticketfacbot?start=suggestion_${encodeURIComponent(text)}`;
                 window.open(botUrl, '_blank');
                 suggestionText.value = '';
                 alert('شكرًا لك! تم تجهيز اقتراحك للإرسال عبر بوت التذاكر.');
