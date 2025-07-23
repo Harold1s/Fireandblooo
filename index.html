@@ -105,6 +105,7 @@
             border-bottom: 2px solid var(--border-color);
             padding-bottom: 10px;
             margin-top: 0;
+            font-size: 1.8rem;
         }
 
         /* --- Events Page --- */
@@ -158,27 +159,86 @@
             color: var(--primary-color);
         }
 
-        /* --- Suggestion Form --- */
-        .form-group {
+        /* --- ✨ جديد: تصميم قسم القوانين --- */
+        .rules-section {
+            margin-bottom: 40px;
+        }
+
+        .rules-section h3 {
+            font-size: 1.5rem;
+            color: #fff;
             margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid var(--border-color);
+            display: flex;
+            align-items: center;
+            gap: 10px;
         }
 
-        .form-group label {
-            display: block;
-            margin-bottom: 8px;
-            font-weight: bold;
+        .rules-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
         }
 
-        .form-group textarea {
-            width: 100%;
-            padding: 12px;
-            border-radius: 8px;
-            border: 1px solid var(--border-color);
+        .rule-card {
             background-color: var(--card-bg);
+            border-radius: 10px;
+            padding: 20px;
+            border-left: 5px solid var(--primary-color);
+            display: flex;
+            flex-direction: column;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .rule-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+        }
+
+        .rule-card h4 {
+            margin: 0 0 10px 0;
+            color: #fff;
+            font-size: 1.1rem;
+        }
+
+        .rule-card p {
+            margin: 0 0 15px 0;
             color: var(--text-color);
-            font-family: 'Cairo', sans-serif;
-            min-height: 120px;
-            resize: vertical;
+            line-height: 1.6;
+            flex-grow: 1; /* Pushes the punishment to the bottom */
+        }
+
+        .punishment {
+            background-color: rgba(255, 77, 77, 0.1);
+            border: 1px solid var(--primary-color);
+            padding: 10px;
+            border-radius: 8px;
+            font-size: 0.9rem;
+            color: #ffc2c2;
+            font-weight: bold;
+            text-align: center;
+        }
+
+        .notes-section {
+            background-color: var(--card-bg);
+            padding: 20px;
+            border-radius: 10px;
+            border-top: 4px solid var(--primary-color);
+            margin-top: 25px;
+        }
+
+        .notes-section h4 {
+            margin-top: 0;
+            color: var(--primary-color);
+        }
+        .notes-section ul {
+            padding-right: 20px;
+            margin: 0;
+            color: var(--text-color);
+        }
+        .notes-section li {
+            margin-bottom: 10px;
         }
         
         /* --- Important Links --- */
@@ -230,6 +290,7 @@
             gap: 4px;
             font-size: 0.75rem;
             font-family: 'Cairo', sans-serif;
+            flex-grow: 1; /* For equal spacing */
         }
         
         .nav-button svg {
@@ -260,21 +321,84 @@
         </div>
 
         <div id="announcements" class="page">
-    <h2>📢 الإعلانات والتحديثات</h2>
-    <div id="announcements-container">
-        </div>
+            <h2>📢 الإعلانات والتحديثات</h2>
+            <div id="announcements-container">
+                </div>
         </div>
         
-        <div id="suggestions" class="page">
-            <h2>🧾 قدم اقتراحك</h2>
-            <p>هل لديك فكرة لتحسين الكروب؟ شاركنا بها! سيتم إرسال اقتراحك مباشرة إلى بوت الدعم.</p>
-            <form id="suggestion-form">
-                <div class="form-group">
-                    <label for="suggestion-text">نص الاقتراح:</label>
-                    <textarea id="suggestion-text" placeholder="اكتب فكرتك هنا..." required></textarea>
+        <div id="rules" class="page">
+            <h2>📜 القوانين والتعليمات</h2>
+        
+            <div class="rules-section">
+                <h3>قوانين الأعضاء</h3>
+                <div class="rules-grid">
+                    <div class="rule-card">
+                        <h4>1. ممنوع الشتم والإساءة</h4>
+                        <p>تجنّب الألفاظ الجارحة أو المسيئة تجاه أي عضو، حتى لو كان على سبيل المزاح.</p>
+                        <div class="punishment">🔸 العقوبة: إنذار</div>
+                    </div>
+                    <div class="rule-card">
+                        <h4>2. ممنوع الترويج</h4>
+                        <p>يُمنع منعًا باتًا نشر روابط لمجموعات أخرى، قنوات، بوتات، أو أي نوع من الإعلانات دون إذن مسبق من الإدارة.</p>
+                        <div class="punishment">🔸 العقوبة: إنذار، ثم تقييد 24 ساعة</div>
+                    </div>
+                    <div class="rule-card">
+                        <h4>3. ممنوع المحتوى غير اللائق</h4>
+                        <p>يشمل ذلك الصور، الملصقات، الفيديوهات، أو أي محتوى خادش للحياء أو مسيء.</p>
+                        <div class="punishment">🔸 العقوبة: حظر مباشر</div>
+                    </div>
+                    <div class="rule-card">
+                        <h4>4. ممنوع النقاشات الحساسة</h4>
+                        <p>للحفاظ على بيئة ودية، يُرجى تجنّب الخوض في النقاشات الدينية أو السياسية التي قد تسبب جدلاً.</p>
+                        <div class="punishment">🔸 العقوبة: إنذار</div>
+                    </div>
+                    <div class="rule-card">
+                        <h4>5. ممنوع السبام والتكرار</h4>
+                        <p>لا ترسل رسائل متكررة، ملصقات بكثرة، أو أي محتوى يهدف إلى إزعاج الأعضاء وإغراق المحادثة.</p>
+                        <div class="punishment">🔸 العقوبة: تقييد ساعتين</div>
+                    </div>
+                    <div class="rule-card">
+                        <h4>6. احترام المشرفين</h4>
+                        <p>يجب اتباع تعليمات المشرفين وعدم الجدال معهم في العام. في حال وجود شكوى، توجّه إلى بوت الدعم.</p>
+                        <div class="punishment">🔸 العقوبة: إنذار</div>
+                    </div>
+                     <div class="rule-card">
+                        <h4>7. ممنوع التحريض والفتنة</h4>
+                        <p>أي محاولة لإثارة الخلافات بين الأعضاء أو زرع الفتنة ستواجه بإجراء صارم.</p>
+                        <div class="punishment">🔸 العقوبة: إنذار</div>
+                    </div>
+                     <div class="rule-card">
+                        <h4>8. ممنوع الطائفية والعنصرية</h4>
+                        <p>نحن مجتمع واحد، لا يُسمح بأي وصف أو تعليق مسيء على أساس ديني أو عرقي أو طائفي.</p>
+                        <div class="punishment">🔸 العقوبة: إنذار</div>
+                    </div>
                 </div>
-                <button type="submit" class="btn">إرسال الاقتراح</button>
-            </form>
+                 <div class="notes-section">
+                    <h4>⚖️ نظام العقوبات</h4>
+                    <p>تراكم <strong>4 إنذارات</strong> يؤدي إلى <strong>تقييد العضو لمدة 24 ساعة</strong>. تكرار المخالفات قد يؤدي إلى الحظر.</p>
+                </div>
+            </div>
+        
+            <div class="rules-section">
+                <h3>🛡️ تعليمات المشرفين</h3>
+                <div class="rules-grid">
+                    <div class="rule-card"><h4>1. كن قدوة حسنة</h4><p>المشرف هو واجهة المجموعة. يجب عليه الالتزام بجميع القوانين العامة وتطبيقها على نفسه أولاً.</p></div>
+                    <div class="rule-card"><h4>2. الحيادية المطلقة</h4><p>تُستخدم الصلاحيات لفرض النظام فقط. يُمنع استخدامها لتصفية حسابات شخصية أو محاباة الأصدقاء.</p></div>
+                    <div class="rule-card"><h4>3. التدرج في العقوبات</h4><p>اتبع التسلسل: إنذار > تقييد > حظر. الحظر الفوري مخصص للمخالفات الجسيمة فقط (محتوى خادش، ترويج).</p></div>
+                    <div class="rule-card"><h4>4. الاحترام في التعامل</h4><p>حافظ على هدوئك وأسلوبك المحترم حتى مع الأعضاء المخالفين. تجنب الاستفزاز واللغة الجارحة.</p></div>
+                    <div class="rule-card"><h4>5. النشاط والمتابعة</h4><p>تواجدك ومشاركتك ضروريان. الغياب الطويل دون عذر مسبق (أكثر من 7 أيام) قد يؤدي لسحب الرتبة.</p></div>
+                    <div class="rule-card"><h4>6. الالتزام بالصلاحيات</h4><p>كل مشرف له مهام محددة. لا تتدخل في صلاحيات مشرف آخر دون تنسيق مسبق.</p></div>
+                    <div class="rule-card"><h4>7. توثيق الإجراءات</h4><p>عند تنفيذ إجراء مهم (تقييد طويل، حظر)، يجب توضيح السبب في مجموعة الإدارة ليكون الجميع على بيّنة.</p></div>
+                </div>
+                <div class="notes-section">
+                    <h4>⚠️ ملاحظات هامة للمشرفين</h4>
+                    <ul>
+                        <li><strong>الحد الأقصى للأخطاء هو 3</strong>، وبعدها يتم سحب الرتبة فورًا.</li>
+                        <li>الأخطاء تشمل: الغياب الطويل، إساءة التعامل، استخدام الصلاحيات بشكل خاطئ.</li>
+                        <li><strong>الحظر بهدف المزاح أو الانتقام مرفوض تمامًا</strong> ويؤدي إلى سحب الرتبة مباشرة دون إنذار مسبق.</li>
+                    </ul>
+                </div>
+            </div>
         </div>
 
         <div id="links" class="page">
@@ -301,9 +425,9 @@
             <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24"><path d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm-2 12H6v-2h12v2zm0-3H6V9h12v2zm0-3H6V6h12v2z"/></svg>
             الإعلانات
         </button>
-        <button class="nav-button" data-page="suggestions">
-            <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24"><path d="M20.41 4.94l-1.35-1.35c-.78-.78-2.05-.78-2.83 0L3 16.82V21h4.18l13.23-13.23c.78-.79.78-2.05 0-2.83zM6.21 19H5v-1.21l8.66-8.66 1.21 1.21L6.21 19z"/></svg>
-            اقتراح
+        <button class="nav-button" data-page="rules">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm0 10.99h7c-.53 4.12-3.28 7.79-7 8.94V12H5V6.3l7-3.11v8.8z"/></svg>
+            القوانين
         </button>
         <button class="nav-button" data-page="links">
              <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24"><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"/></svg>
@@ -315,8 +439,6 @@
     document.addEventListener('DOMContentLoaded', () => {
         const navButtons = document.querySelectorAll('.nav-button');
         const pages = document.querySelectorAll('.page');
-        const suggestionForm = document.getElementById('suggestion-form');
-        const suggestionText = document.getElementById('suggestion-text');
 
         // --- وظيفة التنقل بين الصفحات ---
         function showPage(pageId) {
@@ -332,20 +454,9 @@
             button.addEventListener('click', () => showPage(button.dataset.page));
         });
 
-        // --- وظيفة إرسال الاقتراح (لا تغيير هنا) ---
-        suggestionForm.addEventListener('submit', (e) => {
-            e.preventDefault();
-            const text = suggestionText.value.trim();
-            if (text) {
-                // تأكد من أن هذا الرابط هو رابط بوت التذاكر الصحيح
-                const botUrl = `https://t.me/ticketfacbot?start=suggestion_${encodeURIComponent(text)}`;
-                window.open(botUrl, '_blank');
-                suggestionText.value = '';
-                alert('شكرًا لك! تم تجهيز اقتراحك للإرسال عبر بوت التذاكر.');
-            }
-        });
+        // --- تم حذف وظيفة إرسال الاقتراح ---
 
-        // --- ✨ جديد: وظيفة عرض الفعاليات من ملف JSON ---
+        // --- ✨ وظيفة عرض الفعاليات من ملف JSON ---
         function renderEvents(eventsData) {
             const container = document.getElementById('event-list-container');
             container.innerHTML = '';
@@ -370,9 +481,9 @@
             });
         }
 
-        // --- ✨ جديد: وظيفة عرض الإعلانات من ملف JSON ---
+        // --- ✨ وظيفة عرض الإعلانات من ملف JSON ---
         function renderAnnouncements(announcementsData) {
-            const container = document.getElementById('announcements-container'); // سنضيف هذا الـ ID في HTML
+            const container = document.getElementById('announcements-container');
             container.innerHTML = '';
             if (!announcementsData || announcementsData.length === 0) {
                 container.innerHTML = '<p>لا توجد إعلانات حاليًا.</p>';
@@ -389,7 +500,7 @@
             });
         }
         
-        // --- ✨ جديد: جلب البيانات عند تحميل الصفحة ---
+        // --- ✨ جلب البيانات عند تحميل الصفحة ---
         fetch('events.json?v=' + new Date().getTime()) // إضافة timestamp لمنع التخزين المؤقت (cache)
             .then(response => response.json())
             .then(data => renderEvents(data))
